@@ -1,4 +1,6 @@
-﻿namespace Create_methods_that_return_values___complete_the_challenge_to_add_methods_to_make_the_game_playable;
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace Create_methods_that_return_values___complete_the_challenge_to_add_methods_to_make_the_game_playable;
 
 class Program
 {
@@ -18,12 +20,12 @@ class Program
 
             while (play)
             {
-                var target;
-                var roll;
+                var target = GetTarget();
+                var roll = RollDice();
 
                 Console.WriteLine($"Roll a number greater than {target} to win!");
                 Console.WriteLine($"You rolled a {roll}");
-                Console.WriteLine(WinOrLose());
+                Console.WriteLine(WinOrLose(roll, target));
                 Console.WriteLine("\nPlay again? (Y/N)");
 
                 play = ShouldPlay();
@@ -32,12 +34,27 @@ class Program
 
         bool ShouldPlay()
         {
-            return true;
+            string response = Console.ReadLine();
+
+            return response.ToLower().Equals("y");
         }
 
-        bool WinOrLose()
+        int GetTarget()
         {
-            return true;
+            return random.Next(1, 6);
+        }
+
+        int RollDice()
+        {
+            return random.Next(1, 7);
+        }
+        string WinOrLose(int roll, int target)
+        {
+            if (roll > target)
+            {
+                return "You win!";
+            }
+            return "You lose!";
         }
     }
 }
